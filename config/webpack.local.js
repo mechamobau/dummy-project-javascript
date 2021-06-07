@@ -5,7 +5,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/public/index.html"
 });
 
-const config: webpack.Configuration = {
+const config = {
   // Declara o ambiente como ambiente de desenvolvimento
   mode: "development",
   entry: "./src/index.tsx",

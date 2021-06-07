@@ -9,7 +9,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 
 const root = path.resolve(__dirname, "..");
 
-const config: webpack.Configuration = {
+const config = {
   // Declara o ambiente como ambiente de produção
   mode: "production",
   entry: "./src/index.tsx",
