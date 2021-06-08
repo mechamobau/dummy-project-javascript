@@ -5,9 +5,13 @@ import TaskItem from '../TaskItem/TaskItem';
 const TasksList = () => {
   const { tasks } = useTasks();
 
-  return tasks.map(({ id, ...task }) => {
-    return <TaskItem key={id} id={id} {...task} />;
-  });
+  return (
+    <>
+      {tasks.map(({ id, ...task }) => {
+        return <TaskItem key={id} id={id} {...task} />;
+      })}
+    </>
+  );
 };
 
 export default TasksList;

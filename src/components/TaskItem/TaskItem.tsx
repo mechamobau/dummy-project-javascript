@@ -35,7 +35,13 @@ const RemoveButton = styled.button`
   }
 `;
 
-const TaskItem = (props) => {
+type Props = {
+  id: string;
+  title: string;
+  checked: boolean;
+};
+
+const TaskItem = (props: Props) => {
   const { title, checked, id } = props;
 
   const { selectTask, deselectTask, removeTask } = useTasks();

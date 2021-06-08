@@ -5,6 +5,10 @@ import NewTaskButton from '../NewTaskButton/NewTaskButton';
 
 export const TOP_OVERLAP = 50;
 
+type Props = {
+  children: JSX.Element;
+};
+
 const Container = styled.main`
   display: block;
   max-width: 1200px;
@@ -23,7 +27,7 @@ const Title = styled.h1`
   margin-bottom: 15px;
 `;
 
-const TasksListWrapper = (props) => {
+const TasksListWrapper = (props: Props) => {
   const { children } = props;
 
   return (
