@@ -2,7 +2,6 @@ import React from 'react';
 import { useTasks } from '../../hooks/useTasks';
 import TaskItem from '../TaskItem/TaskItem';
 
-/** @type {() => JSX.Element} */
 const TasksList = () => {
   const { tasks } = useTasks();
 
