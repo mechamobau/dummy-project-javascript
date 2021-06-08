@@ -2,50 +2,35 @@ import constate from 'constate';
 import { nanoid } from 'nanoid';
 import { useEffect, useReducer } from 'react';
 
-/**
- * @typedef Task
- * @property {string} id
- * @property {string} title
- * @property {boolean} checked
- */
-
-const ActionTypeEnum = {
-  ADD_TASK: 'add_task',
-  REMOVE_TASK: 'remove_task',
-  SELECT_TASK: 'check_task',
-  DESELECT_TASK: 'uncheck_task',
+type Task = {
+  id: string;
+  title: string;
+  checked: boolean;
 };
+
+enum ActionTypeEnum {
+  ADD_TASK = 'add_task',
+  REMOVE_TASK = 'remove_task',
+  SELECT_TASK = 'check_task',
+  DESELECT_TASK = 'uncheck_task',
+}
 
 const initialValue = JSON.parse(localStorage.getItem('tasks') ?? '[]');
 
-/**
- * @typedef {typeof ActionTypeEnum} ActionTypeEnum
- */
+type TaskTitle = {
+  title: string;
+};
 
-/**
- * @typedef {{
- *  title: string
- * }} TaskTitle
- */
+type ActionType = {
+  id?: string;
+  type: string;
+  value?: {
+    title: string;
+  };
+  checked?: boolean;
+};
 
-/**
- * @typedef {{
- *  id?: string,
- *  type: string,
- *  value?: {
- *    title: string;
- *  },
- *  checked?: boolean,
- * }} ActionType
- */
-
-/**
- *
- * @param {Task[]} state
- * @param {ActionType} action
- * @returns
- */
-function reducer(state, action) {
+function reducer(state: Task[], action: ActionType) {
   switch (action.type) {
     case ActionTypeEnum.ADD_TASK:
       return [
@@ -80,30 +65,26 @@ const [TasksProvider, useTasks] = constate(() => {
 
   /**
    * Cria uma nova tarefa
-   * @param {{
-   *    title: string;
-   * }} value
    */
-  const createTask = (value) =>
+  const createTask = (value: TaskTitle) =>
     dispatch({ type: ActionTypeEnum.ADD_TASK, value });
 
   /**
    * Exclui uma tarefa existente
-   * @param {string} id
    */
-  const removeTask = (id) => dispatch({ type: ActionTypeEnum.REMOVE_TASK, id });
+  const removeTask = (id: string) =>
+    dispatch({ type: ActionTypeEnum.REMOVE_TASK, id });
 
   /**
    * Marca tarefa como concluída
-   * @param {string} id
    */
-  const selectTask = (id) => dispatch({ type: ActionTypeEnum.SELECT_TASK, id });
+  const selectTask = (id: string) =>
+    dispatch({ type: ActionTypeEnum.SELECT_TASK, id });
 
   /**
    * Marca tarefa como não-concluída
-   * @param {string} id
    */
-  const deselectTask = (id) =>
+  const deselectTask = (id: string) =>
     dispatch({ type: ActionTypeEnum.DESELECT_TASK, id });
 
   useEffect(() => {
