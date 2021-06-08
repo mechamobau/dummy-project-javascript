@@ -2,6 +2,13 @@ import constate from 'constate';
 import { nanoid } from 'nanoid';
 import { useEffect, useReducer } from 'react';
 
+/**
+ * @typedef Task
+ * @property {string} id
+ * @property {string} title
+ * @property {boolean} checked
+ */
+
 const ActionTypeEnum = {
   ADD_TASK: 'add_task',
   REMOVE_TASK: 'remove_task',
@@ -11,10 +18,40 @@ const ActionTypeEnum = {
 
 const initialValue = JSON.parse(localStorage.getItem('tasks') ?? '[]');
 
+/**
+ * @typedef {typeof ActionTypeEnum} ActionTypeEnum
+ */
+
+/**
+ * @typedef {{
+ *  title: string
+ * }} TaskTitle
+ */
+
+/**
+ * @typedef {{
+ *  id?: string,
+ *  type: string,
+ *  value?: {
+ *    title: string;
+ *  },
+ *  checked?: boolean,
+ * }} ActionType
+ */
+
+/**
+ *
+ * @param {Task[]} state
+ * @param {ActionType} action
+ * @returns
+ */
 function reducer(state, action) {
   switch (action.type) {
     case ActionTypeEnum.ADD_TASK:
-      return [...state, { ...action.value, checked: false, id: nanoid() }];
+      return [
+        ...state,
+        { title: action.value?.title ?? '', checked: false, id: nanoid() },
+      ];
     case ActionTypeEnum.REMOVE_TASK:
       return state.filter(({ id: taskId }) => taskId !== action.id);
     case ActionTypeEnum.SELECT_TASK:
