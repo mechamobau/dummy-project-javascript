@@ -1,25 +1,34 @@
-import * as React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
+import TasksList from './components/TasksList/TasksList';
+import TasksListWrapper from './components/TasksListWrapper/TasksListWrapper';
+import COLORS from './constants/colors';
 
-const Title = styled.h1`
-  font-size: 1.25rem;
-`;
+const GlobalStyle = createGlobalStyle`
+  * {
+    outline: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
 
-const Subtitle = styled.h2`
-  font-size: 1rem;
-`;
+  body {
+    margin: 0;
+    background: ${COLORS.primary};
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  }
 
-const Container = styled.main`
-  display: block;
-  max-width: 1200px;
-  margin: 0 auto;
+  html, body, #root {
+    height: 100%;
+  }
 `;
 
 export default function App() {
   return (
-    <Container>
-      <Title>Welcome to the Basic Template for React + TypeScript!</Title>
-      <Subtitle>Subtítulo</Subtitle>
-    </Container>
+    <>
+      <GlobalStyle />
+      <TasksListWrapper>
+        <TasksList />
+      </TasksListWrapper>
+    </>
   );
 }
