@@ -31,7 +31,7 @@ export default function App() {
       <TaskInputBarProvider>
         <>
           <GlobalStyle />
-          <TaskInputBar onSubmit={console.log} />
+          <TaskInputBar />
           <TasksListWrapper>
             <TasksList />
           </TasksListWrapper>

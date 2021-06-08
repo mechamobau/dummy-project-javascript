@@ -23,6 +23,12 @@ const Title = styled.h1`
   margin-bottom: 15px;
 `;
 
+/**
+ *
+ * @param {Object} props
+ * @param {JSX.Element} props.children
+ * @returns
+ */
 const TasksListWrapper = (props) => {
   const { children } = props;
 

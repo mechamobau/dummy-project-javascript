@@ -26,7 +26,7 @@ const InputText = styled.input`
 
 const Form = styled.form``;
 
-const TaskInputBar = (props) => {
+const TaskInputBar = () => {
   const [task, setTask] = useState('');
 
   const { show, setShow } = useTaskInputBar();
