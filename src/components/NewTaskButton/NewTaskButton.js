@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import styled from 'styled-components';
 import COLORS from '../../constants/colors';
-import { TOP_OVERLAP } from '../TasksListWrapper/TasksListWrapper';
+import { useTaskInputBar } from '../../hooks/useTaskInputBar';
 
 const Button = styled.button`
   background: ${COLORS.primary};
@@ -44,7 +44,13 @@ const Button = styled.button`
 `;
 
 const NewTaskButton = () => {
-  return <Button title="Nova tarefa" />;
+  const { setShow } = useTaskInputBar();
+
+  const handleButtonClick = useCallback(() => {
+    setShow(true);
+  }, [setShow]);
+
+  return <Button title="Nova tarefa" onClick={handleButtonClick} />;
 };
 
 export default NewTaskButton;

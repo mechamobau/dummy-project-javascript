@@ -1,8 +1,11 @@
 import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import TaskInputBar from './components/TaskInputBar/TaskInputBar';
 import TasksList from './components/TasksList/TasksList';
 import TasksListWrapper from './components/TasksListWrapper/TasksListWrapper';
 import COLORS from './constants/colors';
+import { TaskInputBarProvider } from './hooks/useTaskInputBar';
+import { TasksProvider } from './hooks/useTasks';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -24,11 +27,16 @@ const GlobalStyle = createGlobalStyle`
 
 export default function App() {
   return (
-    <>
-      <GlobalStyle />
-      <TasksListWrapper>
-        <TasksList />
-      </TasksListWrapper>
-    </>
+    <TasksProvider>
+      <TaskInputBarProvider>
+        <>
+          <GlobalStyle />
+          <TaskInputBar onSubmit={console.log} />
+          <TasksListWrapper>
+            <TasksList />
+          </TasksListWrapper>
+        </>
+      </TaskInputBarProvider>
+    </TasksProvider>
   );
 }

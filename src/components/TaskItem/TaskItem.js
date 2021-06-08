@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+import { useTasks } from '../../hooks/useTasks';
 
 const Checkbox = styled.input`
   margin-right: 15px;
@@ -21,17 +22,40 @@ const ContainerItem = styled.section`
   margin-bottom: 15px;
 `;
 
+const RemoveButton = styled.button`
+  background: transparent;
+  border: 0 none transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before {
+    content: 'X';
+  }
+`;
+
 const TaskItem = (props) => {
-  const { title, checked, onTaskCheck, id } = props;
+  const { title, checked, id } = props;
+
+  const { selectTask, deselectTask, removeTask } = useTasks();
 
   return (
     <ContainerItem>
       <Checkbox
         type="checkbox"
         checked={checked}
-        onChange={() => onTaskCheck(id)}
+        onChange={() => (!checked ? selectTask(id) : deselectTask(id))}
       />
       <Title>{title}</Title>
+      <RemoveButton
+        title="Remover tarefa"
+        onClick={() => {
+          if (confirm('Tem certeza que deseja remover a tarefa?')) {
+            removeTask(id);
+          }
+        }}
+      />
     </ContainerItem>
   );
 };
@@ -44,7 +68,6 @@ TaskItem.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   checked: PropTypes.bool,
-  onTaskCheck: PropTypes.func.isRequired,
 };
 
 export default TaskItem;
